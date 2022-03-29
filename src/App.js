@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {getAllUsers} from "./redux/actions/actionCreator";
+import {useEffect} from "react";
+import UserCard from "./components/UserCard";
+
 
 function App() {
+
+    const users = useSelector(store => store?.users?.acceptedUsers)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        handleUsers()
+    }, [])
+
+    function handleUsers(){
+        dispatch(getAllUsers())
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {
+            users.map((item) => (
+               <UserCard item={item}/>
+            ))
+        }
+
     </div>
   );
 }
