@@ -22,7 +22,9 @@ function App() {
     <div className="App">
         {
             users.map((item) => (
-               <UserCard item={item}/>
+                <div key={item.id}>
+                    <UserCard item={item}/>
+                </div>
             ))
         }
 
